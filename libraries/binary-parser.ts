@@ -1,5 +1,5 @@
 declare const Buffer
-import formats from "./formats";
+import format from "../interfaces"
 
 class BinaryParser {
     #useLittleEndian: boolean;
@@ -11,11 +11,11 @@ class BinaryParser {
     /**
     * v0.1.0 | Javier Belmonte
     * 
-    * @param {*} _object -> Object to serialize
-    * @param {any[]} format -> Serialization formats
-    * @return {*} size -> Size of the bit frame. buffer -> Node.js Buffer.
+    * @param {object} _object -> Object to serialize
+    * @param {format[]} format -> Serialization formats
+    * @return {number, Buffer} size -> Size of the bit frame. buffer -> Node.js Buffer.
     * @memberof BinaryParser
-    * @version 
+    * @version 1.0.0
     */
     encode(_object: any, format: any[]) {
         let size = 0;
@@ -65,17 +65,17 @@ class BinaryParser {
     /**
     * v0.1.0 | Javier Belmonte
     * 
-    * @param {buffer} buffer -> Buffer to deserialize
-    * @param {*} formats -> Deserialization format
-    * @return {*} _object -> Deserialized object
+    * @param {Buffer} buffer -> Buffer to deserialize
+    * @param {format[]} formats -> Deserialization format
+    * @return {Object} _object -> Deserialized object
     * @memberof BinaryParser
-    * @version 
+    * @version 1.0.0
     */
-    decode(buffer: Buffer, formats: any[]) {
+    decode(buffer: Buffer, formats: format[]) {
         const _object = {}
+        let value;
+        let offset = 0;
         formats.forEach(format => {
-            let value;
-            let offset = 0;
             switch (format.type) {
                 case "uint": {
                     const size = Math.ceil(format.len / 8);
@@ -87,6 +87,7 @@ class BinaryParser {
                     const size = Math.ceil(format.len / 8);
                     value = this.#useLittleEndian ? buffer.readIntLE(offset, size) : buffer.readIntBE(offset, size);
                     offset += size;
+                    console.log(value, offset, size);
                     break;
                 }
                 case "float": {
@@ -106,32 +107,6 @@ class BinaryParser {
         });
         return _object
     }
-
 }
 
-const data = {
-    PTemp: 268,
-    "BattVolt.value": 224,
-    WaterLevel: 115
-};
-const format = [
-    { tag: "PTemp", type: "int", len: 12 },
-    { tag: "BattVolt.value", type: "int", len: 12 },
-    { tag: "WaterLevel", type: "int", len: 8 },
-]
-
-var bp = new BinaryParser();
-var dataEncoded = bp.encode(data, formats);
-console.log(dataEncoded.buffer.toString('hex')); //prints 10C0E073
-console.log(dataEncoded.size); //prints 32
-var dataDecoded = bp.decode(dataEncoded.buffer, format);
-console.log(dataDecoded) //prints { PTemp: 268, ‘BattVolt.value’: 224, WaterLevel: 115 }
-
-const format2 = [
-    { tag: "v0", type: "int", len: 8 },
-    { tag: "v1", type: "int", len: 8 },
-    { tag: "v2", type: "int", len: 8 },
-]
-const buffer = Buffer.from("010203", "hex");
-var dataDecoded = bp.decode(buffer, format2);
-console.log(dataDecoded) 
+export default BinaryParser;

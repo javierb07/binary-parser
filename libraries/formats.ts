@@ -1,7 +1,10 @@
-const formats = [ 
+const format1 = [ 
     { tag: "PTemp", type: "int", len: 12 },
     { tag: "BattVolt.value", type: "int", len: 12 }, 
     { tag: "WaterLevel", type: "int", len: 8 },
+]; 
+
+const format2 = [ 
     { tag: "var0.value", type: "uint", len: 2 },
     { tag: "var1.value", type: "uint", len: 2 },
     { tag: "var2.value", type: "uint", len: 7 },
@@ -30,9 +33,12 @@ const formats = [
     { tag: "var1.TimeStamp", type: "float" },
     { tag: "var1.BattV_Avg", type: "float" },
     { tag: "var1.BattV_Min", type: "float" },
+]; 
+
+const format3 = [ 
     { tag: "v0", type: "int", len: 8 },
     { tag: "v1", type: "int", len: 8 },
     { tag: "v2", type: "int", len: 8 },
 ]; 
 
-export default formats;
+export default [format1, format2, format3];
