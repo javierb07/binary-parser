@@ -1,5 +1,5 @@
-import BinaryParser from "../libraries/binary-parser";
-import formats from "../libraries/formats";
+import BinaryParser from "..";
+import formats from "../formats";
 
 test('Encoding measurements', () => {
     // Arrange
