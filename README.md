@@ -26,7 +26,7 @@ Format is an array of objects, where each object corresponds to a definition of 
 
 ``` typescript
 // Module import
-import BinaryParser from "iot-binary-parser";
+import BinaryParser from "iot-binary-parser/src";
 
 // Some sample data an format
 const data = {
@@ -76,3 +76,23 @@ Decodes a buffer into a data object based off the provided formats.
 const bp = new BinaryParser();
 const dataDecoded = bp.decode(buffer, format);
 ```
+
+## Documentation
+
+Module is documented using JSDoc. In the docs folder you can find the documentation generated with JSDoc, or you can can run the script npm run doc to generate it yourself. This runs the command jsdoc -c jsdoc.json
+
+## Example Server
+
+An example server that would communicate with IoT devices is provided in src/app.ts
+Server endpoints:
+
+### POST api/v1/binary-parser/encode
+Receives a JSON body with the data to encode and an array of formats. Returns the encoded buffer.
+
+### POST api/v1/binary-parser/decode
+Receives a JSON body with the buffer to decode and an array of formats. Returns the decoded data.
+
+### GET * 
+All other endpoints return the JSDoc generated documentation.
+
+In utils folder a Postman collection with example requests is provided.

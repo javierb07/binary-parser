@@ -1,7 +1,7 @@
 {
   "name": "iot-binary-parser",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.2",
+  "description": "iot-binary-parser is a parser that enables you to encode objects into buffers and decode buffers into objects. The goal is to optimize overhead in data transfers from IoT devices to IoT platforms.",
   "main": "index.js",
   "scripts": {
     "test": "jest",
