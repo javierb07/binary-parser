@@ -1,5 +1,5 @@
-import BinaryParser from "..";
-import formats from "../formats";
+import BinaryParser from "../src";
+import formats from "../src/formats";
 
 test('Encoding measurements', () => {
     // Arrange
@@ -39,7 +39,6 @@ test('Decoding buffer with format 1', () => {
  test('Decoding buffer with format 3', () => {
     // Arrange
     const buffer = Buffer.from("010203", "hex");
-
     const data = {
          v0: 1,
          v1: 2,

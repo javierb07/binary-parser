@@ -1,0 +1,71 @@
+{
+	"info": {
+		"_postman_id": "2e1432ce-9ec3-4ea9-97b0-66b1b43566db",
+		"name": "Binary Parser",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Econde",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\" : {\r\n        \"PTemp\": 268,\r\n        \"BattVolt.value\": 224,\r\n        \"WaterLevel\": 115\r\n    },\r\n    \"formats\" : [\r\n        { \"tag\": \"PTemp\", \"type\": \"int\", \"len\": 12 },\r\n        { \"tag\": \"BattVolt.value\", \"type\": \"int\", \"len\": 12 },\r\n        { \"tag\": \"WaterLevel\", \"type\": \"int\", \"len\": 8 }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/binary-parser/encode",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"binary-parser",
+						"encode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Decode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"buffer\": \"010c00e073\",\r\n    \"formats\" : [\r\n        { \"tag\": \"PTemp\", \"type\": \"int\", \"len\": 12 },\r\n        { \"tag\": \"BattVolt.value\", \"type\": \"int\", \"len\": 12 },\r\n        { \"tag\": \"WaterLevel\", \"type\": \"int\", \"len\": 8 }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/binary-parser/decode",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"binary-parser",
+						"decode"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

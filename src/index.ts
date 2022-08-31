@@ -1,28 +1,40 @@
+// @ts-check
 declare const Buffer
 import format from "./interfaces"
 
-class BinaryParser {
-    #useLittleEndian: boolean;
+/**
+ * @file index.js is the root file for the Binary Parser
+ * @author Javier Belmonte
+ * @see <a href="https://github.com/javierb07/binary-parser">Binary Parser GitHub</a>
+ */
 
+/**
+ * Class to create a Binary Parser object
+ */
+class BinaryParser {
+    /**
+     *
+     * @param {boolean} useLittleEndian Flag to use little endian if true, otherwise use big endian
+     */
+    #useLittleEndian: boolean;
     constructor(endianness: boolean = false) {
         this.#useLittleEndian = endianness;
     }
 
     /**
-    * v0.1.0 | Javier Belmonte
-    * 
+    * @property {Function} encode Encodes an object into a buffer
     * @param {object} _object -> Object to serialize
-    * @param {format[]} format -> Serialization formats
-    * @return {number, Buffer} size -> Size of the bit frame. buffer -> Node.js Buffer.
+    * @param {format[]} formats -> Serialization formats
+    * @return {number|Buffer} size -> Size of the bit frame. buffer -> Node.js Buffer.
     * @memberof BinaryParser
     * @version 1.0.0
     */
-    encode(_object: any, format: any[]) {
+    encode(_object: object, formats: format[]) {
         let size = 0;
         const buffers = []
         Object.entries(_object)
             .forEach(([key, value]) => {
-                const parsingFormat = format.find((obj: any) => {
+                const parsingFormat = formats.find((obj: any) => {
                     return obj.tag === key;
                 });
                 switch (parsingFormat.type) {
@@ -63,8 +75,7 @@ class BinaryParser {
     }
 
     /**
-    * v0.1.0 | Javier Belmonte
-    * 
+    * @property {Function} decode Decodes a buffer into an object
     * @param {Buffer} buffer -> Buffer to deserialize
     * @param {format[]} formats -> Deserialization format
     * @return {Object} _object -> Deserialized object

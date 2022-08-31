@@ -6,15 +6,19 @@
   "scripts": {
     "test": "jest",
     "build": "npx tsc",
-    "start": "node dist/app.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/app.js\""
+    "start": "node dist/src/app.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/src/app.js\"",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/javierb07/binary-parser.git"
   },
   "keywords": [
-    "iot"
+    "iot",
+    "buffer",
+    "binary",
+    "parser"
   ],
   "author": "Javier Belmonte",
   "license": "ISC",
@@ -34,6 +38,7 @@
     "typescript": "^4.8.2"
   },
   "dependencies": {
+    "body-parser": "^1.20.0",
     "express": "^4.18.1",
     "path": "^0.12.7"
   }
