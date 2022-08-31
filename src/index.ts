@@ -42,7 +42,7 @@ class BinaryParser {
                         size += parsingFormat.len;
                         const allocSize = Math.ceil(parsingFormat.len / 8);
                         const buffer = Buffer.alloc(allocSize);
-                        this.#useLittleEndian ? buffer.writeIntLE(value, 0, allocSize) : buffer.writeIntBE(value, 0, allocSize);
+                        this.#useLittleEndian ? buffer.writeUintLE(value, 0, allocSize) : buffer.writeUintBE(value, 0, allocSize);
                         buffers.push(buffer);
                         break;
                     }
